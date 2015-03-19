@@ -32,7 +32,12 @@ RED.nodes = (function() {
 
     /*
      * Method should output to the console the number of tabs, number of nodes on each
-     * tab (identify by name?:id) and how each node is connected
+     * tab (identify by name?:id) and how each node is connected.
+     * Input: array of node items, populated in the following order
+     *  1. Workspaces
+     *  2. Subflows
+     *  3. Config Nodes
+     *  4. Other Nodes
      */
     function debugNodes(nodeList){
         //TODO: Implement debug logging
@@ -54,8 +59,9 @@ RED.nodes = (function() {
         for (var tab in tabList){
             var thisTab = nodesById[tab];
             var tabNodes = tabList[tab];
-            var tabName = thisTab.label ? thisTab.label : 'Unnamed Tab';
-            console.log("Here are the nodes in tab: " + tabName);
+            var tabType = thisTab.type;
+            var tabName = thisTab.label ? thisTab.label : 'Unnamed ' + tabType;
+            console.log("Here are the nodes in " + tabType +": " + tabName);
             tabNodes.forEach(function(node){
                 console.log(nodeLabel(node));
                 if (node.wires.length > 0){ //there are connections to list
