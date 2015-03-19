@@ -38,6 +38,10 @@ RED.nodes = (function() {
         //TODO: Implement debug logging
         var tabList = {};
         var nodesById = {};
+        var nodeLabel = function(node){
+            var nodeName = node.name ? node.name : 'Unnamed, with ID:';
+            return nodeName + " (" + node.id + ")";
+        };
         nodeList.forEach(function(node){
             nodesById[node.id] = node;
             if (node.z){ // attr z represents the tab the node appears on
@@ -53,8 +57,10 @@ RED.nodes = (function() {
             var tabName = thisTab.label ? thisTab.label : 'Unnamed Tab';
             console.log("Here are the nodes in tab: " + tabName);
             tabNodes.forEach(function(node){
-                var nodeName = node.name ? node.name : 'Unnamed, with ID:';
-                console.log(nodeName + " (" + node.id + ")");
+                console.log(nodeLabel(node));
+                if (node.wires.length > 0){ //there are connections to list
+
+                }
             });
         }
     }
