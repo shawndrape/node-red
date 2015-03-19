@@ -36,8 +36,27 @@ RED.nodes = (function() {
      */
     function debugNodes(nodeList){
         //TODO: Implement debug logging
-        console.log("Hey, you called the right method! Good job.")
-        console.log("The list is " + nodeList.length + " items large");
+        var tabList = {};
+        var nodesById = {};
+        nodeList.forEach(function(node){
+            nodesById[node.id] = node;
+            if (node.z){ // attr z represents the tab the node appears on
+                if (!tabList[node.z])
+                    tabList[node.z] = [node];
+                else
+                    tabList[node.z].push(node);
+            }
+        });
+        for (var tab in tabList){
+            var thisTab = nodesById[tab];
+            var tabNodes = tabList[tab];
+            var tabName = thisTab.label ? thisTab.label : 'Unnamed Tab';
+            console.log("Here are the nodes in tab: " + tabName);
+            tabNodes.forEach(function(node){
+                var nodeName = node.name ? node.name : 'Unnamed, with ID:';
+                console.log(nodeName + " (" + node.id + ")");
+            });
+        }
     }
     
     var registry = (function() {
