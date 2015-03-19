@@ -119,6 +119,8 @@ RED.deploy = (function() {
             $("#btn-icn-deploy").addClass('spinner');
             RED.nodes.dirty(false);
 
+            RED.nodes.debugNodes(nns);
+
             $.ajax({
                 url:"flows",
                 type: "POST",

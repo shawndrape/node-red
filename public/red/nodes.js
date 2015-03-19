@@ -29,6 +29,16 @@ RED.nodes = (function() {
         dirty = d;
         eventHandler.emit("change",{dirty:dirty});
     }
+
+    /*
+     * Method should output to the console the number of tabs, number of nodes on each
+     * tab (identify by name?:id) and how each node is connected
+     */
+    function debugNodes(nodeList){
+        //TODO: Implement debug logging
+        console.log("Hey, you called the right method! Good job.")
+        console.log("The list is " + nodeList.length + " items large");
+    }
     
     var registry = (function() {
         var nodeList = [];
@@ -908,6 +918,7 @@ RED.nodes = (function() {
         createExportableNodeSet: createExportableNodeSet,
         createCompleteNodeSet: createCompleteNodeSet,
         id: getID,
+        debugNodes: debugNodes,
         dirty: function(d) {
             if (d == null) {
                 return dirty;
