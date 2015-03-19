@@ -40,7 +40,6 @@ RED.nodes = (function() {
      *  4. Other Nodes
      */
     function debugNodes(nodeList){
-        //TODO: Implement debug logging
         var tabList = {};
         var nodesById = {};
         var nodeLabel = function(node){
@@ -49,8 +48,8 @@ RED.nodes = (function() {
         };
         nodeList.forEach(function(node){
             nodesById[node.id] = node;
-            if (node.z){ // attr z represents the tab the node appears on
-                if (!tabList[node.z])
+            if (node.hasOwnProperty('z')){ // attr z represents the tab the node appears on
+                if (!tabList.hasOwnProperty(node.z))
                     tabList[node.z] = [node];
                 else
                     tabList[node.z].push(node);
@@ -64,7 +63,13 @@ RED.nodes = (function() {
             console.log("Here are the nodes in " + tabType +": " + tabName);
             tabNodes.forEach(function(node){
                 console.log(nodeLabel(node));
-                if (node.wires.length > 0){ //there are connections to list
+                if (node.wires.length > 0 && node.wires[0].length > 0){ //has outputs
+                    console.log("This node outputs to: ");
+                    node.wires.forEach(function(wireList){
+                        for (var i in wireList){
+                            console.log(" - " + nodeLabel(nodesById[wireList[i]]));
+                        }
+                    });
 
                 }
             });

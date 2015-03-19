@@ -1,0 +1,230 @@
+[
+  {
+    "type": "tab",
+    "id": "c9a29c96.365d6",
+    "label": "First Tab"
+  },
+  {
+    "type": "tab",
+    "id": "5faead54.a05154",
+    "label": ""
+  },
+  {
+    "type": "tab",
+    "id": "6a073182.95f8d",
+    "label": "Sheet 1"
+  },
+  {
+    "id": "f7b33d18.084cc",
+    "type": "subflow",
+    "name": "Subflow 1",
+    "in": [
+      {
+        "x": 78,
+        "y": 169,
+        "wires": [
+          {
+            "id": "9982b23d.667d5"
+          }
+        ]
+      }
+    ],
+    "out": [
+      {
+        "x": 410,
+        "y": 153,
+        "wires": [
+          {
+            "id": "9982b23d.667d5",
+            "port": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "7a779589.85886c",
+    "type": "mqtt-broker",
+    "broker": "localhost",
+    "port": "1883",
+    "clientid": ""
+  },
+  {
+    "id": "34f9a58c.cb065a",
+    "type": "inject",
+    "name": "Node A",
+    "topic": "test",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 107,
+    "y": 145,
+    "z": "c9a29c96.365d6",
+    "wires": [
+      [
+        "7ae8b167.85175"
+      ]
+    ]
+  },
+  {
+    "id": "b2fb075d.4d04f8",
+    "type": "tcp request",
+    "server": "",
+    "port": "",
+    "out": "time",
+    "splitc": "0",
+    "name": "Node B",
+    "x": 415,
+    "y": 155,
+    "z": "c9a29c96.365d6",
+    "wires": [
+      [
+        "83b4657c.7c4b98"
+      ]
+    ]
+  },
+  {
+    "id": "a4f16e8e.5b0e9",
+    "type": "tcp request",
+    "server": "",
+    "port": "",
+    "out": "time",
+    "splitc": "0",
+    "name": "Node C",
+    "x": 501,
+    "y": 76,
+    "z": "c9a29c96.365d6",
+    "wires": [
+      [
+        "b2fb075d.4d04f8"
+      ]
+    ]
+  },
+  {
+    "id": "e3998399.1c668",
+    "type": "inject",
+    "name": "Node A2",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 203,
+    "y": 173,
+    "z": "5faead54.a05154",
+    "wires": [
+      [
+        "bc106b87.43ef98"
+      ]
+    ]
+  },
+  {
+    "id": "bc106b87.43ef98",
+    "type": "debug",
+    "name": "Node B2",
+    "active": true,
+    "console": "false",
+    "complete": "payload",
+    "x": 489,
+    "y": 179,
+    "z": "5faead54.a05154",
+    "wires": []
+  },
+  {
+    "id": "83b4657c.7c4b98",
+    "type": "subflow:f7b33d18.084cc",
+    "name": "",
+    "x": 553,
+    "y": 186,
+    "z": "c9a29c96.365d6",
+    "wires": [
+      [
+        "dac38f68.253c7"
+      ]
+    ]
+  },
+  {
+    "id": "7ae8b167.85175",
+    "type": "switch",
+    "name": "Switch A",
+    "property": "payload",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "Hi"
+      },
+      {
+        "t": "eq",
+        "v": "Bye"
+      }
+    ],
+    "checkall": "false",
+    "outputs": 2,
+    "x": 250,
+    "y": 147,
+    "z": "c9a29c96.365d6",
+    "wires": [
+      [
+        "a4f16e8e.5b0e9",
+        "64433cf2.9bbcc4"
+      ],
+      [
+        "b2fb075d.4d04f8"
+      ]
+    ]
+  },
+  {
+    "id": "9982b23d.667d5",
+    "type": "function",
+    "name": "SubNode A",
+    "func": "\nreturn 'huh.';",
+    "outputs": 1,
+    "valid": true,
+    "x": 249,
+    "y": 171,
+    "z": "f7b33d18.084cc",
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "dac38f68.253c7",
+    "type": "mqtt out",
+    "name": "Node with Config",
+    "topic": "",
+    "qos": "",
+    "retain": "",
+    "broker": "7a779589.85886c",
+    "x": 668,
+    "y": 295,
+    "z": "c9a29c96.365d6",
+    "wires": []
+  },
+  {
+    "id": "64433cf2.9bbcc4",
+    "type": "debug",
+    "name": "Debug Node",
+    "active": true,
+    "console": "false",
+    "complete": "payload",
+    "x": 345,
+    "y": 55,
+    "z": "c9a29c96.365d6",
+    "wires": []
+  },
+  {
+    "id": "d48d0836.2b72f8",
+    "type": "serial in",
+    "name": "Serial 1",
+    "serial": "",
+    "x": 228,
+    "y": 272,
+    "z": "c9a29c96.365d6",
+    "wires": [
+      []
+    ]
+  }
+]
